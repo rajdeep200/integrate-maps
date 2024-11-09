@@ -1,9 +1,10 @@
-"use client";
+'use client';
 
-// import React, { useState, useEffect } from "react";
-import MapComponent from "../AppComponents/MapComponent";
+import dynamic from 'next/dynamic';
+const MapComponent = dynamic(() => import("../AppComponents/MapComponent"), {
+  ssr: false, 
+});
 import "leaflet/dist/leaflet.css";
-// import { ThemeProvider } from "@/components/theme-provider";
 
 const Page = () => {
   return (

@@ -8,15 +8,12 @@ import LocationMarker from "./LocationMarker";
 import { Input } from "@/components/ui/input";
 import { getLocationList } from "@/services/locationService";
 import locationIconPng from "../../assets/location.png";
-import outLocationIconPng from "../../assets/outLocation.png";
 
 const MapComponent = () => {
-  const [location, setLocation] = useState([22.5744, 88.3629]);
-  const [debounceTime, setDebounceTime] = useState(null);
+  const [location, setLocation] = useState<[number, number]>([22.5744, 88.3629]);
   const [userInput, setUserInput] = useState("");
-  const [locationIcon, setLocationIcon] = useState(locationIconPng);
   const [locationList, setLocationList] = useState([]);
-  const [isInputFocused, setIsInputFocused] = useState(false);
+  // const [isInputFocused, setIsInputFocused] = useState(false);
   const debounceRef = useRef(null);
   const zoom = 13;
 
@@ -62,7 +59,7 @@ const MapComponent = () => {
     }, 500);
   };
 
-  console.log("locationList :: ", locationList);
+  console.log("userInput :: ", userInput);
 
   const handleSearchLocation = (location) => {
     console.log("handleSearchLocation location :: ", location);
@@ -79,8 +76,8 @@ const MapComponent = () => {
           type="email"
           placeholder="Enter location..."
           className="w-full py-6 mb-6"
-          onFocus={() => setIsInputFocused(true)}
-          onBlur={() => setIsInputFocused(false)}
+          // onFocus={() => setIsInputFocused(true)}
+          // onBlur={() => setIsInputFocused(false)}
           onChange={(e) => handleSearchChange(e)}
         />
         <div
@@ -107,7 +104,7 @@ const MapComponent = () => {
           className="h-[100%] w-[100%] rounded-md z-10"
         >
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-          <LocationMarker location={location} icon={locationIcon} />
+          <LocationMarker location={location} icon={locationIconPng} />
         </MapContainer>
         <Button
           className="text-lg px-12 py-6 mt-4 font-bold"
